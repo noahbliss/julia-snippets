@@ -6,12 +6,12 @@ using DelimitedFiles
 settingsfile = "settings.conf"
 importedvars = readdlm(settingsfile, '=', String; skipblanks=true)
 
-function a2var(var, a)
+function a2var(key, a)
     c=1
     for i in getindex(a, :, 1)
-        var == i && return getindex(a, c, 2) ; c=c+1
+        key == i && return getindex(a, c, 2) ; c=c+1
     end
-    error("$var not found")
+    error("$key not found")
 end
 
 var1 = a2var("var1", importedvars)
