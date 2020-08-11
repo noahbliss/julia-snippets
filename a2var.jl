@@ -6,7 +6,7 @@ using DelimitedFiles
 settingsfile = "settings.conf"
 importedvars = readdlm(settingsfile, '=', String; skipblanks=true)
 
-a2var(key, a) = (c=1; for i in getindex(a, :, 1); key == i && return getindex(a, c, 2) ; c=c+1; end || error("$key not found"))
+a2var(key, a) = (c=1; for i in getindex(a, :, 1); i == key && return getindex(a, c, 2) ; c=c+1; end || error("$key not found"))
 
 var1 = a2var("var1", importedvars)
 println(var1)
@@ -15,7 +15,7 @@ println(var1)
 function a2var(key, a)
     c=1
     for i in getindex(a, :, 1)
-        key == i && return getindex(a, c, 2) ; c=c+1
+        i == key && return getindex(a, c, 2) ; c=c+1
     end
     error("$key not found")
 end
